@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <style>
+        tr td,
+        tr th {
+            padding: 5px;
+        }
+
+        @media only screen and (max-width: 500px) {
+
+            th:nth-child(n+4),
+            td:nth-child(n+4) {
+                display: none;
+            }
+        }
+        #name{
+            padding:5px;
+            border-radius: 10px;
+            margin:10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="calFun()">Click Me</button>
+    <div id="myDiv"></div>
+    <table style="border:1px solid #ccc;border-collapse:collapse;margin-top:10px;" border="1">
+        <tr>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+            <th>One</th>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+            <td>Value</td>
+        </tr>
+    </table>
+    <div>
+        <input type="text" id="name" onchange="searchInArray(event)" />
+    </div>
+    <div id="table">
+    </div>
+    <script>
+        var myArray = [
+            {
+                Name: 'MMK',
+                Age: 22,
+                City: 'Ongole',
+                DOB: '22-07-1995',
+                Department: 'IT'
+            },
+            {
+                Name: 'Maneesh',
+                Age: 22,
+                City: 'Ongole',
+                DOB: '22-07-1995',
+                Department: 'IT'
+            },
+            {
+                Name: 'Giri',
+                Age: 22,
+                City: 'Ongole',
+                DOB: '22-07-1995',
+                Department: 'IT'
+            },
+            {
+                Name: 'Harish',
+                Age: 22,
+                City: 'Ongole',
+                DOB: '22-07-1995',
+                Department: 'IT'
+            },
+            {
+                Name: 'Suresh',
+                Age: 22,
+                City: 'Ongole',
+                DOB: '22-07-1995',
+                Department: 'IT'
+            },
+            {
+                Name: 'Kishore',
+                Age: 22,
+                City: 'Nellore',
+                DOB: '22-07-1995',
+                Department: 'CSE'
+            },
+            {
+                Name: 'Anirudh',
+                Age: 22,
+                City: 'Bapatla',
+                DOB: '22-07-1995',
+                Department: 'Spotfire'
+            },
+            {
+                Name: 'Mani',
+                Age: 22,
+                City: 'Vijayawada',
+                DOB: '22-07-1995',
+                Department: 'DBA'
+            }
+        ];
+        var div = document.getElementById('table');
+
+        function bindTable(myArr) {
+            var table = document.createElement('table');
+            table.setAttribute('id','myTable');
+            var tr = document.createElement('tr');
+            var th1 = document.createElement('th');
+            th1.textContent = 'Name';
+
+            var th2 = document.createElement('th');
+            th2.textContent = 'Age';
+
+            var th3 = document.createElement('th');
+            th3.textContent = 'City';
+
+            var th4 = document.createElement('th');
+            th4.textContent = 'DOB';
+
+            var th5 = document.createElement('th');
+            th5.textContent = 'Department';
+
+            var nodes = [th1, th2, th3, th4, th5];
+            tr.append(th1, th2, th3, th4, th5);
+            table.appendChild(tr);
+            table.style.marginTop = '5px';
+            table.border = 1;
+            table.style.borderCollapse = 'collapse';
+            for (var i = 0; i < myArr.length; i++) {
+                var tr = document.createElement('tr');
+                var td1 = document.createElement('td');
+                td1.textContent = myArr[i].Name;
+                var td2 = document.createElement('td');
+                td2.textContent = myArr[i].Age;
+                var td3 = document.createElement('td');
+                td3.textContent = myArr[i].City;
+                var td4 = document.createElement('td');
+                td4.textContent = myArr[i].DOB;
+                var td5 = document.createElement('td');
+                td5.textContent = myArr[i].Department;
+                tr.append(td1, td2, td3, td4, td5);
+                table.appendChild(tr);
+            }
+            div.appendChild(table);
+        }
+
+        bindTable(myArray);
+
+        function searchInArray(e) {
+            var val = e.target.value;
+            var arr = []
+            myArray.forEach(function (ele, index, array) {
+                if (ele.Name.toLowerCase().indexOf(val) > -1 || ele.Age.toString().indexOf(val) > -1 || ele.DOB.toString().indexOf(val) > -1
+                    || ele.City.toLowerCase().indexOf(val) > -1 || ele.Department.toLowerCase().indexOf(val) > -1) {
+                    arr.push(ele);
+                }
+            });
+            var table = document.getElementById('myTable');
+            div.removeChild(table);
+            bindTable(arr);
+        }
+
+        function calFun() {
+            var i = 10;
+            var ele = setInterval(function () {
+                document.getElementById('myDiv').innerHTML = i;
+                i--;
+            }, 1000);
+            setTimeout(function () {
+                clearInterval(ele);
+                alert('Times Up!');
+            }, 10000);
+        }
+    </script>
+</body>
+
+</html>
